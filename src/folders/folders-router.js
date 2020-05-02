@@ -5,6 +5,7 @@ const logger = require('../logger')
 const FoldersService = require('./folders-service');
 const foldersRouter = express.Router();
 const bodyParser = express.json();
+const { v4: uuidv4 } = require('uuid')
 
 //serialize folder- xss
 const serializeFolder = folder => ({
@@ -26,8 +27,8 @@ foldersRouter
  })
  .post(bodyParser, (req, res, next) => {
      const knexInstance = req.app.get('db');
-     const { name, id } = req.body; 
-     const newFolder = { name, id };
+     const { name } = req.body; 
+     const newFolder = { name,  id: uuidv4() };
 
      if(!name){
          return res.status(400).json({

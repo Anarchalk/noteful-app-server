@@ -28,7 +28,7 @@ notesRouter
      const knexInstance = req.app.get('db');
      const { name, content, modified, folder_id } = req.body;
      const newNote = { name, content, modified, folder_id };
-
+    console.log(newNote)
      //each value in new note is required, verify that they were sent
      for(const [key, value] of Object.entries(newNote)){
          if(value == null){
