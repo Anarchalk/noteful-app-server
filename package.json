@@ -6,6 +6,9 @@
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "env SSL=true DB_URL=$(heroku config:get DB_URL) npm run migrate",
     "start": "node src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
@@ -23,12 +26,14 @@
     "morgan": "^1.10.0",
     "pg": "^8.0.3",
     "uuid": "^8.0.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "xss": "^1.0.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.1.2",
     "nodemon": "^2.0.3",
+    "postgrator-cli": "^3.2.0",
     "supertest": "^4.0.2"
   }
 }
